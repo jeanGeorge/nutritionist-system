@@ -1,5 +1,5 @@
 # Sistema para Nutricionista
-Desenvolvido em Java, compilado e testado com a [JDK 14] (https://github.com/AdoptOpenJDK/openjdk14-binaries/releases).
+Desenvolvido em Java, compilado e testado com a JDK 14 (https://github.com/AdoptOpenJDK/openjdk14-binaries/releases).
 
 
 # Para rodar o programa:
@@ -7,5 +7,7 @@ Desenvolvido em Java, compilado e testado com a [JDK 14] (https://github.com/Ado
 
 2. 
 Rode o App.java na sua IDE preferida
+
 ou execute o .jar presente em /App/src/
+
 ou abra a pasta /App/src/ num terminal e execute o comando: $ find . -type f -name '*.class' -delete && javac App.java && java App
