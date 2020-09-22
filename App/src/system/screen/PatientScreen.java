@@ -14,7 +14,7 @@ import system.utils.Util;
 
 public class PatientScreen extends Screen<Patient> {
   public PatientScreen() {
-    databasePath = "./App/database/Patient.txt";
+    databasePath = "../database/Patient.txt";
     if (!loadData()) {
       System.out.println("Ocorreu um problema e não foi possível carregar os Pacientes.");
     }

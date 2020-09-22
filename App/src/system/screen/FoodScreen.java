@@ -19,7 +19,7 @@ import food.Vegetable;
 
 public class FoodScreen extends Screen<Food> {
   public FoodScreen() {
-    databasePath = "./App/database/Food.txt";
+    databasePath = "../database/Food.txt";
     if (!loadData()) {
       System.out.println("Ocorreu um problema e não foi possível carregar os Alimentos.");
     }

@@ -17,7 +17,7 @@ public class DietScreen extends Screen<Diet> {
   private PatientScreen patientScreen;
 
   public DietScreen(FoodScreen foodScreen, PatientScreen patientScreen) {
-    databasePath = "./App/database/Diet.txt";
+    databasePath = "../database/Diet.txt";
     this.foodScreen = foodScreen;
     this.patientScreen = patientScreen;
     if (!loadData()) {

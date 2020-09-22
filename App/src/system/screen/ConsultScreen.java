@@ -1,6 +1,7 @@
 package system.screen;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class ConsultScreen extends Screen<Consult> {
     this.foodScreen = foodScreen;
     this.patientScreen = patientScreen;
     this.dietScreen = dietScreen;
-    databasePath = "./App/database/Consult.txt";
+    databasePath = "../database/Consult.txt";
     if (!loadData()) {
       System.out.println("Ocorreu um problema e não foi possível carregar as Consultas.");
     }
