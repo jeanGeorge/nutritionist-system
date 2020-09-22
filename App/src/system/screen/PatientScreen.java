@@ -13,6 +13,35 @@ import system.screen.options.OptionTypeEnum;
 import system.utils.Util;
 
 public class PatientScreen extends Screen<Patient> {
+  public Patient findById(int id) {
+    for (Patient patient : data) {
+      if (patient.getId() == id) {
+        return patient;
+      }
+    }
+    return new Patient();
+  }
+
+  public int generateId() {
+    int newId = 0;
+    for (Patient patient : data) {
+      if (patient.getId() >= newId) {
+        newId = patient.getId() + 1;
+      }
+    }
+    return newId;
+  }
+
+  protected boolean isValidId(int id) {
+    boolean valid = false;
+    for (Patient patient : data) {
+      if (patient.getId() == id) {
+        valid = true;
+      }
+    }
+    return valid;
+  }
+
   public PatientScreen() {
     databasePath = "../database/Patient.txt";
     if (!loadData()) {
@@ -135,34 +164,5 @@ public class PatientScreen extends Screen<Patient> {
       }
     }
     return false;
-  }
-
-  public Patient findById(int id) {
-    for (Patient patient : data) {
-      if (patient.getId() == id) {
-        return patient;
-      }
-    }
-    return new Patient();
-  }
-
-  public int generateId() {
-    int newId = 0;
-    for (Patient patient : data) {
-      if (patient.getId() >= newId) {
-        newId = patient.getId() + 1;
-      }
-    }
-    return newId;
-  }
-
-  protected boolean isValidId(int id) {
-    boolean valid = false;
-    for (Patient patient : data) {
-      if (patient.getId() == id) {
-        valid = true;
-      }
-    }
-    return valid;
   }
 }

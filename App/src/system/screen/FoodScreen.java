@@ -3,7 +3,6 @@ package system.screen;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.Scanner;
 
@@ -28,6 +27,35 @@ public class FoodScreen extends Screen<Food> {
         new Option(OptionTypeEnum.REGISTER, "Cadastrar Alimento"), new Option(OptionTypeEnum.EDIT, "Editar Alimento"),
         new Option(OptionTypeEnum.DELETE, "Remover Alimento"));
     this.footer = new Option(OptionTypeEnum.BACK, "Voltar para o Menu Principal");
+  }
+
+  public Food findById(int id) {
+    for (Food food : data) {
+      if (food.getId() == id) {
+        return food;
+      }
+    }
+    return new Food();
+  }
+
+  protected int generateId() {
+    int newId = 0;
+    for (Food food : data) {
+      if (food.getId() >= newId) {
+        newId = food.getId() + 1;
+      }
+    }
+    return newId;
+  }
+
+  protected boolean isValidId(int id) {
+    boolean valid = false;
+    for (Food food : data) {
+      if (food.getId() == id) {
+        valid = true;
+      }
+    }
+    return valid;
   }
 
   public boolean loadData() {
@@ -153,34 +181,5 @@ public class FoodScreen extends Screen<Food> {
       }
     }
     return false;
-  }
-
-  public Food findById(int id) {
-    for (Food food : data) {
-      if (food.getId() == id) {
-        return food;
-      }
-    }
-    return new Food();
-  }
-
-  protected int generateId() {
-    int newId = 0;
-    for (Food food : data) {
-      if (food.getId() >= newId) {
-        newId = food.getId() + 1;
-      }
-    }
-    return newId;
-  }
-
-  protected boolean isValidId(int id) {
-    boolean valid = false;
-    for (Food food : data) {
-      if (food.getId() == id) {
-        valid = true;
-      }
-    }
-    return valid;
   }
 }

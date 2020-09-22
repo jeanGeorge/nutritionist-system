@@ -41,6 +41,35 @@ public class ConsultScreen extends Screen<Consult> {
     this.footer = new Option(OptionTypeEnum.BACK, "Voltar para o Menu Principal");
   }
 
+  public Consult findById(int id) {
+    for (Consult consult : data) {
+      if (consult.getId() == id) {
+        return consult;
+      }
+    }
+    return new Consult();
+  }
+
+  public int generateId() {
+    int newId = 0;
+    for (Consult Diet : data) {
+      if (Diet.getId() >= newId) {
+        newId = Diet.getId() + 1;
+      }
+    }
+    return newId;
+  }
+
+  protected boolean isValidId(int id) {
+    boolean valid = false;
+    for (Consult Diet : data) {
+      if (Diet.getId() == id) {
+        valid = true;
+      }
+    }
+    return valid;
+  }
+
   public boolean loadData() {
     data = new ArrayList<>();
     try {
@@ -99,66 +128,6 @@ public class ConsultScreen extends Screen<Consult> {
   public void showData() {
     for (Consult consult : data) {
       System.out.println(consult.toString());
-    }
-  }
-
-  public Consult findById(int id) {
-    for (Consult consult : data) {
-      if (consult.getId() == id) {
-        return consult;
-      }
-    }
-    return new Consult();
-  }
-
-  private Map<Integer, List<Food>> calculatePossibleDiets(float calorieLimit) {
-    Map<Integer, List<Food>> possibleDiets = new HashMap<>();
-    List<Animal> animalFoods = new ArrayList<>();
-    List<Vegetable> vegetableFoods = new ArrayList<>();
-    List<Mineral> mineralFoods = new ArrayList<>();
-    int validDiets = 0;
-
-    for (Food food : foodScreen.getData()) {
-      if (food instanceof Animal) {
-        animalFoods.add((Animal) food);
-      } else if (food instanceof Vegetable) {
-        vegetableFoods.add((Vegetable) food);
-      } else if (food instanceof Mineral) {
-        mineralFoods.add((Mineral) food);
-      }
-    }
-
-    for (Animal animalFood : animalFoods) {
-      if (animalFood.getCalories() >= calorieLimit) {
-        continue;
-      }
-      for (Vegetable vegetableFood : vegetableFoods) {
-        if (animalFood.getCalories() + vegetableFood.getCalories() >= calorieLimit) {
-          continue;
-        }
-        for (Mineral mineralFood : mineralFoods) {
-          if (animalFood.getCalories() + vegetableFood.getCalories() + mineralFood.getCalories() > calorieLimit) {
-            continue;
-          }
-          validDiets++;
-          List<Food> validFoodCombination = new ArrayList<>();
-          validFoodCombination.add(animalFood);
-          validFoodCombination.add(vegetableFood);
-          validFoodCombination.add(mineralFood);
-          possibleDiets.put(validDiets, validFoodCombination);
-        }
-      }
-    }
-    return possibleDiets;
-  }
-
-  private void showPossibleDiets(Map<Integer, List<Food>> possibleDiets) {
-    for (Map.Entry<Integer, List<Food>> entry : possibleDiets.entrySet()) {
-      System.out.println("Possível dieta " + entry.getKey() + ":");
-      for (Food food : entry.getValue()) {
-        System.out.println(food);
-      }
-      System.out.println();
     }
   }
 
@@ -251,23 +220,54 @@ public class ConsultScreen extends Screen<Consult> {
     return false;
   }
 
-  public int generateId() {
-    int newId = 0;
-    for (Consult Diet : data) {
-      if (Diet.getId() >= newId) {
-        newId = Diet.getId() + 1;
+  private void showPossibleDiets(Map<Integer, List<Food>> possibleDiets) {
+    for (Map.Entry<Integer, List<Food>> entry : possibleDiets.entrySet()) {
+      System.out.println("Possível dieta " + entry.getKey() + ":");
+      for (Food food : entry.getValue()) {
+        System.out.println(food);
       }
+      System.out.println();
     }
-    return newId;
   }
 
-  protected boolean isValidId(int id) {
-    boolean valid = false;
-    for (Consult Diet : data) {
-      if (Diet.getId() == id) {
-        valid = true;
+  private Map<Integer, List<Food>> calculatePossibleDiets(float calorieLimit) {
+    Map<Integer, List<Food>> possibleDiets = new HashMap<>();
+    List<Animal> animalFoods = new ArrayList<>();
+    List<Vegetable> vegetableFoods = new ArrayList<>();
+    List<Mineral> mineralFoods = new ArrayList<>();
+    int validDiets = 0;
+
+    for (Food food : foodScreen.getData()) {
+      if (food instanceof Animal) {
+        animalFoods.add((Animal) food);
+      } else if (food instanceof Vegetable) {
+        vegetableFoods.add((Vegetable) food);
+      } else if (food instanceof Mineral) {
+        mineralFoods.add((Mineral) food);
       }
     }
-    return valid;
+
+    for (Animal animalFood : animalFoods) {
+      if (animalFood.getCalories() >= calorieLimit) {
+        continue;
+      }
+      for (Vegetable vegetableFood : vegetableFoods) {
+        if (animalFood.getCalories() + vegetableFood.getCalories() >= calorieLimit) {
+          continue;
+        }
+        for (Mineral mineralFood : mineralFoods) {
+          if (animalFood.getCalories() + vegetableFood.getCalories() + mineralFood.getCalories() > calorieLimit) {
+            continue;
+          }
+          validDiets++;
+          List<Food> validFoodCombination = new ArrayList<>();
+          validFoodCombination.add(animalFood);
+          validFoodCombination.add(vegetableFood);
+          validFoodCombination.add(mineralFood);
+          possibleDiets.put(validDiets, validFoodCombination);
+        }
+      }
+    }
+    return possibleDiets;
   }
 }

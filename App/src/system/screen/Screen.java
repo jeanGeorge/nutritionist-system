@@ -45,6 +45,10 @@ public abstract class Screen<T> {
 
   public abstract T findById(int id);
 
+  protected abstract int generateId();
+
+  protected abstract boolean isValidId(int id);
+
   public abstract boolean loadData();
 
   public abstract boolean saveData();
@@ -56,8 +60,4 @@ public abstract class Screen<T> {
   public abstract boolean editData();
 
   public abstract boolean removeData(int id, boolean needInteraction);
-
-  protected abstract int generateId();
-
-  protected abstract boolean isValidId(int id);
 }

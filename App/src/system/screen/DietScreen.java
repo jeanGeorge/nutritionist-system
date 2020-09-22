@@ -38,9 +38,24 @@ public class DietScreen extends Screen<Diet> {
     return new Diet();
   }
 
-  public void insertDiet(Diet diet) {
-    diet.setId(generateId());
-    data.add(diet);
+  public int generateId() {
+    int newId = 0;
+    for (Diet Diet : data) {
+      if (Diet.getId() >= newId) {
+        newId = Diet.getId() + 1;
+      }
+    }
+    return newId;
+  }
+
+  protected boolean isValidId(int id) {
+    boolean valid = false;
+    for (Diet Diet : data) {
+      if (Diet.getId() == id) {
+        valid = true;
+      }
+    }
+    return valid;
   }
 
   public boolean loadData() {
@@ -125,23 +140,8 @@ public class DietScreen extends Screen<Diet> {
     return false;
   }
 
-  public int generateId() {
-    int newId = 0;
-    for (Diet Diet : data) {
-      if (Diet.getId() >= newId) {
-        newId = Diet.getId() + 1;
-      }
-    }
-    return newId;
-  }
-
-  protected boolean isValidId(int id) {
-    boolean valid = false;
-    for (Diet Diet : data) {
-      if (Diet.getId() == id) {
-        valid = true;
-      }
-    }
-    return valid;
+  public void insertDiet(Diet diet) {
+    diet.setId(generateId());
+    data.add(diet);
   }
 }
