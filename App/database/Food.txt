@@ -1,0 +1,6 @@
+id;name;calories;unitOfMeasurement;type
+1;Arroz branco;41;gramas;ANIMAL
+2;Arroz integral;22;gramas;VEGETAL
+3;Batata-doce cozida;4;gramas;VEGETAL
+4;Peito de Frango Cozido;4;gramas;ANIMAL
+5;Agua;4;mililitros;MINERAL

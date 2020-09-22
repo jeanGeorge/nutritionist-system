@@ -1,0 +1,2 @@
+id;patientId;dietId;date;schedule;weight;bodyFatPercentage;physicalSensation;dietaryRestrictions
+1;1;1;01/01/2020;10:00;70;30;normal;não

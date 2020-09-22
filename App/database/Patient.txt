@@ -1,0 +1,3 @@
+id;name;address;phones;email;birthdate
+1;Jean George;Rua Aqui de Casa 123;(31) 98765-4321;jean.george.alves@gmail.com;09/09/1998
+2;Fulano de Tal;Rua da Casa Dele 321;(31) 91234-5678, (12) 94567-8910;fulano@gmail.com;01/01/1990
